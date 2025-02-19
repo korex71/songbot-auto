@@ -41,15 +41,6 @@ def get_lavalink(folder):
     except requests.exceptions.RequestException as e:
         print(f"# Lavalink::Error: {e}")
 
-
-def load_app_config():
-    try:
-        with open(APPCONFIG_PATH, "r") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {}
-
-
 def clone_github_bot():
     if not os.path.isdir(BOT_FOLDER):
         print("[X] Cloning bot repository...")
@@ -89,23 +80,12 @@ def check_lavalink_uptime(retries=10):
     print("[X] Error: Lavalink did not start in time.")
     return False
 
-
-def write_always_start_config():
-    appconfig = load_app_config()
-    appconfig["ALWAYS_START"] = True
-    with open(APPCONFIG_PATH, "w") as f:
-        json.dump(appconfig, f)
-    print("[X] Always start saved.")
-
-
-def start_lavalink():
+def start_bot():
     print("[X] Starting Lavalink...")
     subprocess.run(f'start cmd /k "cd /d {LAVALINK_FOLDER} && java -jar Lavalink.jar"', shell=True)
     if not check_lavalink_uptime():
         raise RuntimeError("Lavalink did not start correctly.")
 
-
-def start_bot():
     print("[X] Starting bot...")
     subprocess.run(f'start cmd /k "cd /d {BOT_FOLDER} && npm run start"', shell=True)
 
