@@ -110,18 +110,17 @@ def start_bot():
     subprocess.run(f'start cmd /k "cd /d {BOT_FOLDER} && npm run start"', shell=True)
 
 
-def initialize_bot():
+def setup_dependencies():
     clone_github_bot()
-    copy_configuration_files()
     prisma_db_migration()
     get_lavalink(LAVALINK_FOLDER)
-    start_bot()
-
+    copy_configuration_files()
 
 def ask_initialize():
     choice = input("# Update bot and Lavalink or just start? [U(Update)/S(Start)]: ").strip().lower()
     if choice == "u":
-        initialize_bot()
+        setup_dependencies()
+        start_bot()
     else:
         copy_configuration_files()
         start_bot()
@@ -129,7 +128,8 @@ def ask_initialize():
 
 def main():
     if not os.path.isdir(BOT_FOLDER):
-        initialize_bot()
+        setup_dependencies()
+        start_bot()
     else:
         ask_initialize()
 
