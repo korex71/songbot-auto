@@ -7,16 +7,16 @@
 3. run it alongside lavalink.
 
 ## Deps
-`$ pip install -r requirements.txt`
+`$ cargo install`
 
 ## Config
 * .env [see lavamusic doc](https://github.com/appujet/lavamusic)
 * application.yml [see lavalink doc](https://lavalink.dev/configuration/index.html#example-environment-variables)
 
 ## Requiriments
-* Python3
+* [rustup](https://www.rust-lang.org/tools/install) 
 * Git
 * Node
 
 ## Build .exe
-`$ pip pyinstaller.exe --onefile --icon=icon.ico main.py`
+`$ cargo build --release --target=x86_64-pc-windows-msvc`
