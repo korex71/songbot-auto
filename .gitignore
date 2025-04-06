@@ -1,6 +1,3 @@
-dist
-build
-__pycache__
-lavamusic
+/target
 .env
-.idea
+/lavamusic
