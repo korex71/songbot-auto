@@ -46,6 +46,13 @@ async fn main() {
     let cli = Cli::parse();
     let (current_dir, bot_folder, lavalink_folder) = utils::get_paths();
 
+    utils::create_application_yml_file();
+
+    if utils::create_json_env_file() {
+        println!("[X] Arquivo .env criado com sucesso. Preencha-o.");
+        return;
+    }
+
     match cli.command {
         Some(Commands::Setup) => {
             full_setup().await;
